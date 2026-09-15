@@ -11,13 +11,16 @@
     
     <!-- The browser evaluates source tags top-to-bottom and loads ONLY the first supported codec -->
     <audio id="audioPlayer" controls>
-        <!-- 1. Apple Positional Audio Codec (iOS / macOS Safari) -->
-        <source src="32 bit float.mp4" type='audio/mp4'>
+    <!-- 1. Apple spatial source declared as video/mp4 for macOS Safari -->
+    <source src="32 bit float.mp4" type="video/mp4">
+    
+    <!-- 2. Apple spatial source declared as audio/mp4 for iOS Safari -->
+    <source src="32 bit float.mp4" type='audio/mp4'>
         
-        <!-- 2. Eclipsa / IAMF Spatial Audio (Android / Chrome) -->
+        <!-- 3. Eclipsa / IAMF Spatial Audio (Android / Chrome) -->
 <!--         <source src="track-eclipsa.mp4" type='audio/mp4; codecs="iamf"'> -->
         
-        <!-- 3. Standard Stereo Fallback (WAV) -->
+        <!-- 4. Standard Stereo Fallback (WAV) -->
         <source src="speech_male_female.wav" type="audio/wav">
         
         <p>Your browser does not support the audio element.</p>
