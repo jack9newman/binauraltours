@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spatial Audio Codec Fallback Test</title>
+</head>
+<body>
+
+    <h2>Multi-Codec Audio Test</h2>
+    
+    <!-- The browser evaluates source tags top-to-bottom and loads ONLY the first supported codec -->
+    <audio id="audioPlayer" controls>
+        <!-- 1. Apple Positional Audio Codec (iOS / macOS Safari) -->
+        <source src="32 bit float.mp4" type='audio/mp4; codecs="apac"'>
+        
+        <!-- 2. Eclipsa / IAMF Spatial Audio (Android / Chrome) -->
+<!--         <source src="track-eclipsa.mp4" type='audio/mp4; codecs="iamf"'> -->
+        
+        <!-- 3. Standard Stereo Fallback (WAV) -->
+        <source src="speech_male_female.wav" type="audio/wav">
+        
+        <p>Your browser does not support the audio element.</p>
+    </audio>
+
+    <p id="statusText">Detecting loaded source...</p>
+
+    <script>
+        const player = document.getElementById('audioPlayer');
+        const statusText = document.getElementById('statusText');
+
+        // Once the browser selects a file and reads its metadata, display which file won
+        player.addEventListener('loadedmetadata', () => {
+            statusText.innerText = `Active source chosen by browser: ${player.currentSrc}`;
+        });
+
+        // Optional: Log an error if no sources can be played
+        player.addEventListener('error', () => {
+            statusText.innerText = "Error: None of the provided audio sources are supported by this browser.";
+        }, true);
+    </script>
+
+</body>
+</html>
